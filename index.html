@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Angélus GUEDEGBE</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    :root {
+        --primary: #6366F1;
+        --primary-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+        --accent: #EC4899;
+        --dark: #0F172A;
+        --light: #F8FAFC;
+
+        --bg-color: var(--light);
+        --text-color: #1E293B;
+        --text-muted: #64748B;
+        --card-bg: rgba(255, 255, 255, 0.8);
+        --header-bg: rgba(248, 250, 252, 0.85);
+        --input-bg: #FFFFFF;
+        --input-border: #E2E8F0;
+        --footer-bg: #0F172A;
+        --footer-text: #F8FAFC;
+        --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        --shadow-hover: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+    }
+
+    [data-theme="dark"] {
+        --bg-color: #090D16;
+        --text-color: #F1F5F9;
+        --text-muted: #94A3B8;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --header-bg: rgba(9, 13, 22, 0.85);
+        --input-bg: #1E293B;
+        --input-border: #334155;
+        --footer-bg: #030712;
+        --footer-text: #F1F5F9;
+        --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 25px 50px -12px rgba(139, 92, 246, 0.3);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background: var(--bg-color);
+        transition: background 0.3s ease, color 0.3s ease;
+        overflow-x: hidden;
+    }
+
+    section[id] {
+        scroll-margin-top: 100px;
+    }
+
+    /* HEADER & NAVBAR */
+    header {
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 5%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .theme-switch {
+        --toggle-size: 30px;
+        --container-width: 3.5em;
+        --container-height: 1.6em;
+        --container-light-bg: #3D7EAE;
+        --circle-container-diameter: 2.1em;
+        --sun-moon-diameter: 1.3em;
+        --sun-bg: #ECCA2F;
+        --moon-bg: #C4C9D1;
+        --spot-color: #959DB1;
+        --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+        font-size: 18px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .theme-switch .checkbox {
+        display: none;
+    }
+
+    .theme-switch .container {
+        width: var(--container-width);
+        height: var(--container-height);
+        background-color: var(--container-light-bg);
+        border-radius: 6.25em;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+        transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    }
+
+    .theme-switch .container::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+    }
+
+    .theme-switch .circle-container {
+        width: var(--circle-container-diameter);
+        height: var(--circle-container-diameter);
+        background-color: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        left: var(--circle-container-offset);
+        top: var(--circle-container-offset);
+        border-radius: 6.25em;
+        box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+        display: flex;
+        transition: 0.3s cubic-bezier(0, -0.02, 0.35, 1.17);
+        pointer-events: none;
+    }
+
+    .theme-switch .sun-moon-container {
+        pointer-events: auto;
+        position: relative;
+        z-index: 2;
+        width: var(--sun-moon-diameter);
+        height: var(--sun-moon-diameter);
+        margin: auto;
+        border-radius: 6.25em;
+        background-color: var(--sun-bg);
+        box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+        filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+        overflow: hidden;
+        transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+    }
+
+    .theme-switch .moon {
+        transform: translateX(100%);
+        width: 100%;
+        height: 100%;
+        background-color: var(--moon-bg);
+        border-radius: inherit;
+        box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+        transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+        position: relative;
+    }
+
+    .theme-switch .spot {
+        position: absolute;
+        top: 0.75em;
+        left: 0.312em;
+        width: 0.5em;
+        height: 0.5em;
+        border-radius: 6.25em;
+        background-color: var(--spot-color);
+        box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+    }
+
+    .theme-switch .spot:nth-of-type(2) {
+        width: 0.25em;
+        height: 0.25em;
+        top: 0.937em;
+        left: 1.375em;
+    }
+
+    .theme-switch .spot:nth-of-type(3) {
+        width: 0.187em;
+        height: 0.187em;
+        top: 0.312em;
+        left: 0.812em;
+    }
+
+    .theme-switch .checkbox:checked + .container {
+        background-color: #1D1F2C;
+    }
+
+    .theme-switch .checkbox:checked + .container .circle-container {
+        left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+    }
+
+    .theme-switch .checkbox:checked + .container .moon {
+        transform: translate(0);
+    }
+
+    .hamburger {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--text-color);
+    }
+
+    /* HERO SECTION */
+    .hero {
+        padding: 120px 5% 80px;
+        position: relative;
+    }
+
+    .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .hero-text {
+        flex: 1;
+    }
+
+    .badge-intro {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--primary);
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .hero h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+    }
+
+    .typewriter-text {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+        max-width: 540px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: var(--primary-gradient);
+        color: white;
+        box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-secondary {
+        background: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--input-border);
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    /* HERO PHOTO WITH GLOW */
+    .hero-photo-wrapper {
+        position: relative;
+    }
+
+    .hero-photo-wrapper::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        filter: blur(25px);
+        opacity: 0.4;
+        z-index: 1;
+    }
+
+    .hero-photo {
+        position: relative;
+        z-index: 2;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid var(--card-bg);
+        box-shadow: var(--shadow);
+    }
+
+    .hero-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .hero-photo:hover img {
+        transform: scale(1.08);
+    }
+
+    /* SECTIONS GENERALES */
+    section {
+        padding: 90px 5%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    /* SKILLS & ABOUT */
+    .about-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 1px solid var(--input-border);
+        box-shadow: var(--shadow);
+        text-align: center;
+        max-width: 850px;
+        margin: 0 auto 3rem;
+    }
+
+    .about-card p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+    }
+
+    .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .skill-card {
+        background: var(--card-bg);
+        border: 1px solid var(--input-border);
+        padding: 12px 24px;
+        border-radius: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .skill-card i {
+        font-size: 1.2rem;
+        color: var(--primary);
+    }
+
+    .skill-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* PROJECTS GRID */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .project-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        border: 1px solid var(--input-border);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+        border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .project-img-wrapper {
+        position: relative;
+        height: 210px;
+        overflow: hidden;
+    }
+
+    .project-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img-wrapper img {
+        transform: scale(1.08);
+    }
+
+    .project-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .project-content h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .project-content p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        flex-grow: 1;
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--primary);
+        font-weight: 700;
+    }
+
+    .project-links {
+        display: flex;
+        gap: 1rem;
+        border-top: 1px solid var(--input-border);
+        padding-top: 1rem;
+    }
+
+    .project-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.2s ease;
+    }
+
+    .project-links a:hover {
+        color: var(--primary);
+    }
+
+    /* CONTACT SECTION */
+    .contact-container {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    .whatsapp-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        padding: 16px;
+        background: #25D366;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        border-radius: 50px;
+        font-size: 1.05rem;
+        box-shadow: 0 10px 20px -5px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+
+    .facebook-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        padding: 16px;
+        background: #421fdf;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        border-radius: 50px;
+        font-size: 1.05rem;
+        box-shadow: 0 10px 20px -5px rgba(46, 33, 233, 0.4);
+        transition: all 0.3s ease;
+        margin-bottom: 4rem;
+    }
+
+    .whatsapp-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px -5px rgba(37, 211, 102, 0.5);
+    }
+
+    .facebook-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px -5px rgba(46, 33, 233, 0.5);
+    }
+
+    .whatsapp-btn i {
+        font-size: 1.4rem;
+    }
+
+    .facebook-btn i {
+        font-size: 1.4rem;
+    }
+
+    .contact-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2rem;
+    }
+
+    .contact-divider::before, .contact-divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid var(--input-border);
+    }
+
+    .contact-divider span {
+        padding: 0 1rem;
+    }
+
+    .form-wrapper {
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 1px solid var(--input-border);
+        box-shadow: var(--shadow);
+    }
+
+    #contactForm {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .input-group label {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    #contactForm input, #contactForm textarea {
+        padding: 14px;
+        border: 1px solid var(--input-border);
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        background: var(--input-bg);
+        color: var(--text-color);
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    #contactForm input:focus, #contactForm textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    #contactForm button {
+        padding: 16px;
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3);
+    }
+
+    #contactForm button:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+    }
+
+    #formMessage {
+        text-align: center;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+
+    #formMessage.success { color: #10B981; }
+    #formMessage.error { color: #EF4444; }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 3rem 5%;
+        background: var(--footer-bg);
+        color: var(--footer-text);
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-links a {
+        color: var(--footer-text);
+        font-size: 1.3rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+        opacity: 0.8;
+    }
+
+    .social-links a:hover {
+        opacity: 1;
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    footer p {
+        font-size: 0.9rem;
+        opacity: 0.7;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 900px) {
+        .hero-content {
+            flex-direction: column-reverse;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 { font-size: 2.4rem; }
+        .hero p { max-width: 100%; }
+        .hero-buttons { justify-content: center; }
+        .hero-photo { width: 200px; height: 200px; }
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--header-bg);
+            backdrop-filter: blur(15px);
+            padding: 2rem 0;
+            text-align: center;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--input-border);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links.active { display: flex; }
+        .hamburger { display: block; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <nav>
+            <div class="logo">Angélus GUEDEGBE.dev</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <label class="theme-switch" aria-label="Changer de thème">
+                    <input type="checkbox" class="checkbox" id="themeToggle">
+                    <div class="container">
+                        <div class="circle-container">
+                            <div class="sun-moon-container">
+                                <div class="moon">
+                                    <div class="spot"></div>
+                                    <div class="spot"></div>
+                                    <div class="spot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <button class="hamburger" id="hamburger" aria-label="Menu mobile">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="accueil" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="badge-intro">
+                        <i class="fa-solid fa-code"></i> <em>GUEDEGBE Angélus Développeur Web Junior</em>
+                    </div>
+                    <h1>Créateur d'expériences <span class="typewriter-text" id="typewriter"></span></h1>
+                    <p>Je conçois et développe des interfaces web modernes, rapides et adaptées à tous les écrans pour concrétiser vos projets digitaux.</p>
+                    <div class="hero-buttons">
+                        <a href="#projets" class="btn btn-primary">
+                            <i class="fa-solid fa-rocket"></i> Voir mes projets
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fa-solid fa-paper-plane"></i> Me contacter
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-photo-wrapper">
+                    <div class="hero-photo">
+                        <img src="angelus.jpg" alt="Photo d'Angélus GUEDEGBE">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT & SKILLS SECTION -->
+        <section id="apropos">
+            <div class="section-header">
+                <h2>À propos & Compétences</h2>
+                <p>Découvrez mon univers et les technologies que j'utilise au quotidien.</p>
+            </div>
+
+            <div class="about-card">
+                <p>Étudiant passionné par le développement web, je suis motivé par l'apprentissage continu et la création de solutions esthétiques et fonctionnelles. J'aime résoudre des problèmes complexes et concrétiser des idées à travers un code propre et optimisé.</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fa-brands fa-html5"></i> HTML5</div>
+                <div class="skill-card"><i class="fa-brands fa-css3-alt"></i> CSS3 / Flexbox / Grid</div>
+                <div class="skill-card"><i class="fa-brands fa-js"></i> JavaScript (ES6+)</div>
+                <div class="skill-card"><i class="fa-solid fa-database"></i> Gestion des Bases de Données</div>
+                <div class="skill-card"><i class="fa-solid fa-mobile-screen-button"></i> Responsive Design</div>
+                <div class="skill-card"><i class="fa-brands fa-figma"></i> Intégration Web</div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projets">
+            <div class="section-header">
+                <h2>Mes Réalisations</h2>
+                <p>Une sélection de projets sur lesquels j'ai travaillé récemment.</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- PROJET 1 -->
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="https://www.redacteur.com/blog/wp-content/uploads/sites/6/2023/01/archiduchesse.webp" alt="Capture d'écran E-commerce">
+                    </div>
+                    <div class="project-content">
+                        <h3>Site E-Commerce Modern</h3>
+                        <p>Plateforme de vente en ligne complète avec filtrage dynamique de produits et panier d'achat interactif.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Démo Live</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJET 2 -->
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="https://cdn.dribbble.com/userupload/11348239/file/original-36ea77359888ea7fca54eb34629598c8.png?resize=752x&vertical=center" alt="Capture d'écran To-Do List">
+                    </div>
+                    <div class="project-content">
+                        <h3>Application Task Manager</h3>
+                        <p>Gestionnaire de tâches interactif intégrant le LocalStorage pour la persistance des données utilisateur.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JS ES6</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Démo Live</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJET 3 -->
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY5QgXrRrIDczzwo7JjCcKdTxh48zEU7bFOrJVVx81mhXPqbNuZN75pQfS&s=10" alt="Capture d'écran Agence de Voyage">
+                    </div>
+                    <div class="project-content">
+                        <h3>Site Vitrine Agence de Voyage</h3>
+                        <p>Landing page immersive valorisant les destinations touristiques au Bénin avec une ergonomie optimisée.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS Grid</span>
+                            <span class="tech-tag">Design Responsive</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Démo Live</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="section-header">
+                <h2>Me Contacter</h2>
+                <p>Un projet en tête ou une opportunité ? N'hésitez pas à me joindre !</p>
+            </div>
+
+            <div class="contact-container">
+                <a class="whatsapp-btn" href="https://wa.me/229153009061?text=Bonjour%20Ang%C3%A9lus%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio%20!" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-whatsapp"></i> Discuter directement sur WhatsApp
+                </a>
+                <a class="facebook-btn" href="https://www.facebook.com/angelu.guedegbe?mibextid=wwXIfr" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-facebook"></i> Discuter directement sur Facebook
+                </a>
+
+                <div class="contact-divider">
+                    <span>ou envoyez-moi un mail</span>
+                </div>
+
+                <div class="form-wrapper">
+                    <form id="contactForm" novalidate>
+                        <div class="input-group">
+                            <label for="nom">Nom complet</label>
+                            <input type="text" id="nom" name="nom" placeholder="Écrivez votre nom et prénom" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Adresse Email</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Décrivez votre besoin..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button>
+                        <p id="formMessage" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:angelusguedegbe25@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>© 2026 Angélus GUEDEGBE — Tous droits réservés.</p>
+    </footer>
+
+    <script>
+    // 1. EFFET TYPEWRITER POUR LE TITRE
+    const words = ["web sur-mesure.", "interactives.", "responsives.", "modernes.", "esthétiques.", "adaptées."];
+    let i = 0;
+
+    function typingEffect() {
+        let word = words[i].split("");
+        const loopTyping = function() {
+            if (word.length > 0) {
+                document.getElementById('typewriter').innerHTML += word.shift();
+                setTimeout(loopTyping, 100);
+            } else {
+                setTimeout(deletingEffect, 2000);
+            }
+        };
+        loopTyping();
+    }
+
+    function deletingEffect() {
+        let word = words[i].split("");
+        const loopDeleting = function() {
+            if (word.length > 0) {
+                word.pop();
+                document.getElementById('typewriter').innerHTML = word.join("");
+                setTimeout(loopDeleting, 50);
+            } else {
+                i = (i + 1) % words.length;
+                typingEffect();
+            }
+        };
+        loopDeleting();
+    }
+
+    typingEffect();
+
+    // 2. MENU HAMBURGER (MOBILE)
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-xmark');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-xmark');
+        });
+    });
+
+    // 3. DARK / LIGHT THEME TOGGLE
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+
+    function applyTheme(theme) {
+        htmlEl.setAttribute('data-theme', theme);
+        themeToggle.checked = theme === 'dark';
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+
+    themeToggle.addEventListener('change', () => {
+        const newTheme = themeToggle.checked ? 'dark' : 'light';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+
+    // 4. GESTION FORMULAIRE DE CONTACT
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nom = document.getElementById('nom').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        formMessage.classList.remove('success', 'error');
+
+        if (!nom || !email || !message) {
+            formMessage.textContent = "Veuillez remplir tous les champs.";
+            formMessage.classList.add('error');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            formMessage.textContent = "Veuillez entrer une adresse email valide.";
+            formMessage.classList.add('error');
+            return;
+        }
+
+        formMessage.textContent = `Merci ${nom} ! Votre message a bien été envoyé.`;
+        formMessage.classList.add('success');
+        contactForm.reset();
+    });
+    </script>
+</body>
+</html>
